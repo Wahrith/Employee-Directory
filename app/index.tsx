@@ -120,24 +120,22 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Scrollable list — sits above the fixed pagination bar */}
+      {/* Fixed header: search bar + count — always visible, never scrolls */}
+      <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
+      {employees && filteredEmployees.length > 0 && (
+        <Text style={styles.count}>
+          {filteredEmployees.length}{' '}
+          {filteredEmployees.length !== 1 ? 'EMPLOYEES' : 'EMPLOYEE'}
+        </Text>
+      )}
+
+      {/* Scrollable list */}
       <Animated.View style={[styles.listWrapper, { opacity: fadeAnim }]}>
         <FlatList
           ref={flatListRef}
           data={paginatedItems}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          ListHeaderComponent={
-            <View>
-              <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
-              {employees && filteredEmployees.length > 0 && (
-                <Text style={styles.count}>
-                  {filteredEmployees.length}{' '}
-                  {filteredEmployees.length !== 1 ? 'EMPLOYEES' : 'EMPLOYEE'}
-                </Text>
-              )}
-            </View>
-          }
           ListEmptyComponent={<EmptyState searchQuery={searchQuery} />}
           refreshControl={
             <RefreshControl
