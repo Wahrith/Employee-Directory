@@ -40,7 +40,8 @@ A production-quality React Native mobile application built with **Expo** and **T
 - **Offline Caching** — React Query data persisted to AsyncStorage (24-hour TTL)
 - **Dark Mode** — Automatic system-based theme with full color token support
 - **Animations** — Fade-in list items (staggered), scale press feedback, slide-up details
-- **Unit Tests** — 24 tests across components, hooks, and utility functions
+- **Pagination** — Client-side paginated list with smart page-window algorithm and progress bar
+- **Unit Tests** — 86 tests across 6 suites covering components, hooks, and utility functions
 
 ---
 
@@ -63,6 +64,7 @@ employee-directory/
 │   ├── components/
 │   │   ├── EmployeeCard.tsx    # List card with fade-in animation
 │   │   ├── SearchBar.tsx       # Search input with animated clear button
+│   │   ├── Pagination.tsx      # Page controls with smart window algorithm
 │   │   ├── LoadingState.tsx    # Animated skeleton loader
 │   │   ├── ErrorState.tsx      # Error display with retry button
 │   │   ├── EmptyState.tsx      # Empty search results display
@@ -73,6 +75,7 @@ employee-directory/
 │   │   ├── queryKeys.ts        # Centralized React Query key factory
 │   │   ├── useEmployees.ts     # Fetch all employees
 │   │   ├── useEmployee.ts      # Fetch single employee by ID
+│   │   ├── usePagination.ts    # Page state, navigation, and slice logic
 │   │   └── index.ts
 │   │
 │   ├── store/
@@ -95,9 +98,11 @@ employee-directory/
 ├── __tests__/
 │   ├── components/
 │   │   ├── EmployeeCard.test.tsx
+│   │   ├── Pagination.test.tsx
 │   │   └── SearchBar.test.tsx
 │   ├── hooks/
-│   │   └── useEmployees.test.ts
+│   │   ├── useEmployees.test.ts
+│   │   └── usePagination.test.ts
 │   └── utils/
 │       └── formatters.test.ts
 │
@@ -197,7 +202,9 @@ npm run test:coverage
 | `EmployeeCard.test.tsx` | 5 tests — render, press, accessibility |
 | `SearchBar.test.tsx` | 6 tests — input, clear button, callbacks |
 | `useEmployees.test.ts` | 3 tests — loading, success, error states |
-| **Total** | **24 tests** |
+| `usePagination.test.ts` | 38 tests — page state, navigation, edge cases |
+| `Pagination.test.tsx` | 24 tests — rendering, buttons, page pills, window algorithm |
+| **Total** | **86 tests** |
 
 ---
 
